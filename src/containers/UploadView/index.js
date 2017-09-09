@@ -8,11 +8,18 @@ import RaisedButton           from 'material-ui/RaisedButton';
 import { styles } from './styles.scss';
 
 /* actions */
-import * as uiActionCreators   from 'core/actions/actions-ui';
+import * as uiActionCreators     from 'core/actions/actions-ui';
+import * as votingActionCreators from 'core/actions/actions-vote';
+
 
 class UploadView extends Component {
   constructor(props) {
     super(props);
+  }
+
+  vote=() => {
+    const { actions } = this.props;
+    actions.vote.voteUp();
   }
 
   render() {
@@ -29,7 +36,7 @@ class UploadView extends Component {
             id="link" />
           <br />
           <br />
-          <RaisedButton label="Upload!" />
+          <RaisedButton label="Upload!" onTouchTap={this.vote} />
         </form>
       </div>
     );
@@ -37,4 +44,12 @@ class UploadView extends Component {
 
 }
 
-export default connect(null)(UploadView);
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: {
+      vote: bindActionCreators(votingActionCreators, dispatch)
+    }
+  };
+}
+
+export default connect(null, mapDispatchToProps)(UploadView);
