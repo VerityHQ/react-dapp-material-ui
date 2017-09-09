@@ -1,7 +1,7 @@
 import constants from 'core/types';
 
 /**
- * upload - Upload title + link
+ * upload - Upload title + link (a.k.a. url)
  */
 export function upload(title, link) {
   return (dispatch, getState) => {
