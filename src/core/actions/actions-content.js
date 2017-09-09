@@ -1,10 +1,19 @@
 import constants from 'core/types';
 
 /**
- * vote - Vote on content
+ * upload - Upload title + link
  */
 export function upload(title, link) {
-  return {
-    type: constants.UPLOAD
-  };
+  return (dispatch, getState) => {
+    const { provider } = getState().provider;
+
+    dispatch((() => {
+      return {
+        title: title,
+        link: link,
+        type: constants.UPLOAD
+      };
+    })());
+  }
+
 }
