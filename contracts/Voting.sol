@@ -7,7 +7,9 @@ contract Voting is SimpleStorage {
     bytes32 content;
   }
 
-  mapping (ContentId => address) private contentMap;
+  address userAddress
+
+  mapping (ContentId => userAddress) private contentMap;
 
   function upVote (contentId) {
 
