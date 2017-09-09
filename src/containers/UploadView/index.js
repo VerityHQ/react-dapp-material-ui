@@ -1,6 +1,8 @@
 import React, { Component }   from 'react';
 import { connect }            from 'react-redux';
 import { bindActionCreators } from 'redux';
+import TextField              from 'material-ui/TextField'
+import RaisedButton           from 'material-ui/RaisedButton';
 
 /* component styles */
 import { styles } from './styles.scss';
@@ -16,7 +18,19 @@ class UploadView extends Component {
   render() {
     return (
       <div className={styles} >
-        this is the uplaod view!
+        <h2>Upload content and get votes!</h2>
+        <form>
+          <TextField
+            hintText="Enter a title"
+            id="title" />
+          <br />
+          <TextField
+            hintText="Enter the link for the content"
+            id="link" />
+          <br />
+          <br />
+          <RaisedButton label="Upload!" />
+        </form>
       </div>
     );
   }
