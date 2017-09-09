@@ -34,15 +34,12 @@ export class App extends Component {
     let web3Provider, currentProvider;
 
     if (typeof web3 !== 'undefined') {
-      const currentProvider = "111111"
-      web3Provider = new Web3(currentProvider);
+      web3Provider = new Web3(web3.currentProvider);
     } else {
-      // set the provider you want from Web3.providers
-      currentProvider = new web3.providers.HttpProvider('http://localhost:8545');
-      web3Provider = new Web3(App.web3Provider);
+      alert('You must install MetaMask!')
     }
 
-    actions.specifyProvider(web3Provider);
+    actions.provider.specifyProvider(web3Provider);
   }
 
   render() {
@@ -68,7 +65,7 @@ export class App extends Component {
 function mapDispatchToProps(dispatch) {
   return {
     actions: {
-      content: bindActionCreators(providerActionCreators, dispatch)
+      provider: bindActionCreators(providerActionCreators, dispatch)
     }
   };
 }
