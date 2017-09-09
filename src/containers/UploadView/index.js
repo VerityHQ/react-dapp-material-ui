@@ -18,9 +18,16 @@ class UploadView extends Component {
   }
 
   upload=(evt) => {
-    const { actions } = this.props;
+    const { actions, history } = this.props;
+    const { title, link } = evt.currentTarget
     evt.preventDefault();
-    actions.content.upload();
+
+    if(title.value !== "" && link.value !== "") {
+      actions.content.upload(title.value, link.value);
+      history.push('/');
+    } else {
+      alert('You are missing values!');
+    }
   }
 
   render() {
