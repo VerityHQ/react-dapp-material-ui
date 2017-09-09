@@ -3,7 +3,7 @@ import { connect }                from 'react-redux';
 import injectTapEventPlugin       from 'react-tap-event-plugin';
 import getMuiTheme                from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider           from 'material-ui/styles/MuiThemeProvider';
-import { BrowserRouter, Route }   from 'react-router-dom'
+import { HashRouter, Route }      from 'react-router-dom'
 import * as OfflinePluginRuntime  from 'offline-plugin/runtime';
 
 
@@ -14,6 +14,7 @@ import './styles/app.scss';
 import Header     from 'containers/Header';
 import LeftNavBar from 'containers/LeftNavBar';
 import Home       from 'containers/Home';
+import UploadView from 'containers/UploadView';
 
 injectTapEventPlugin();
 
@@ -27,17 +28,18 @@ export class App extends Component {
   render() {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme()}>
-        <div>
-          <Header />
-          <div className="container">
-            <BrowserRouter>
+        <HashRouter>
+          <div>
+            <Header />
+            <div className="container">
               <div>
                 <Route exact path="/" component={Home}/>
+                <Route exact path="/upload" component={UploadView} />
               </div>
-            </BrowserRouter>
+            </div>
+            <LeftNavBar />
           </div>
-          <LeftNavBar />
-        </div>
+        </HashRouter>
       </MuiThemeProvider>
     );
   }

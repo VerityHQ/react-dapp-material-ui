@@ -2,6 +2,8 @@ import React, { Component }   from 'react';
 import { connect }            from 'react-redux';
 import { bindActionCreators } from 'redux';
 import AppBar                 from 'components/AppBar';
+import { FlatButton }         from 'material-ui';
+import { withRouter }         from 'react-router-dom';
 
 /* actions */
 import * as uiActionCreators from 'core/actions/actions-ui';
@@ -18,12 +20,19 @@ class Header extends Component {
     this.props.actions.ui.openNav();
   }
 
-  render() {
+  goToUpload=() => {
+    const { history } = this.props;
+    history.push('/upload');
+  }
 
+  render() {
     return (
       <div className={styles}>
         <header>
-          <AppBar onLeftIconButtonTouchTap= {this.handleToggle} />
+          <AppBar
+            onLeftIconButtonTouchTap={this.handleToggle}
+            onRightIconButtonTouchTap={this.goToUpload}
+            iconElementRight={<FlatButton label="Upload" />} />
         </header>
       </div>
     );
@@ -44,4 +53,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));
