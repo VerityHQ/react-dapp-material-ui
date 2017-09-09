@@ -17,8 +17,9 @@ class UploadView extends Component {
     super(props);
   }
 
-  upload=() => {
+  upload=(evt) => {
     const { actions } = this.props;
+    evt.preventDefault();
     actions.content.upload();
   }
 
@@ -26,7 +27,7 @@ class UploadView extends Component {
     return (
       <div className={styles} >
         <h2>Upload content and get votes!</h2>
-        <form>
+        <form onSubmit={this.upload}>
           <TextField
             hintText="Enter a title"
             id="title" />
@@ -36,7 +37,7 @@ class UploadView extends Component {
             id="link" />
           <br />
           <br />
-          <RaisedButton label="Upload!" onTouchTap={this.upload} />
+          <RaisedButton type="submit" label="Upload!" />
         </form>
       </div>
     );
