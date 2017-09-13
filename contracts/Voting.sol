@@ -7,7 +7,7 @@ contract Voting is SimpleStorage {
     bytes32 content;
   }
 
-  address userAddress
+  address userAddress;
 
   mapping (ContentId => userAddress) private contentMap;
 
