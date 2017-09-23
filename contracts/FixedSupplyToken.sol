@@ -67,6 +67,7 @@ contract FixedSupplyToken is ERC20Interface {
    
       function totalSupply() constant returns (uint256 totalSupply) {
           totalSupply = _totalSupply;
+          return totalSupply;
       }
    
      // What is the balance of a particular account?
