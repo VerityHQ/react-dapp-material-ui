@@ -36,7 +36,8 @@ export class App extends Component {
     if (typeof web3 !== 'undefined') {
       web3Provider = new Web3(web3.currentProvider);
     } else {
-      alert('You must install MetaMask!')
+      const appProvider = new Web3.providers.HttpProvider("http://localhost:8545");
+      web3Provider = new Web3(appProvider);
     }
 
     actions.provider.specifyProvider(web3Provider);
