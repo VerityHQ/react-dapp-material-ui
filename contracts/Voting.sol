@@ -1,43 +1,33 @@
 pragma solidity ^0.4.2;
 
-import "./SimpleStorage.sol";
-
-contract Voting is SimpleStorage {
-  struct ContentId {
-    bytes32 content;
+contract Voting {
+  //TODO create unit tests, that not only test, but guid a javascript / UI dev how to use this.
+  //TODO figure out how to get a list of URLS back to client, given a user address
+  //TODO figure out how to get a list of voter addresses back to the client given a URL
+  //TODO add logging so UI clients can get logging data for 'free' from the local blockchain node.
+  struct Vote {
+    address curator; //address (identity) of curator
+    uint voteCount; //total upvotes
   }
 
-  address userAddress;
+  // maps URL to Vote struct
+  mapping (string => Vote) private voteMap;
 
-  mapping (ContentId => userAddress) private contentMap;
+  // maps userID (account address) to content
+  mapping (address => string) private curatorMap;
 
-  function upVote (contentId) {
-
+  function upVote (string url) {
+    voteMap[url].voteCount++;
   }
 
-  function getVotes(contentId) {
-
+  function getVotes(string url) returns(uint count) {
+    return voteMap[url].voteCount;
   }
 
-  function createContent(bytes32 contentId) payable returns (bytes32) {
-    // Check if user exists.
-    // If yes, return user name.
-    // If no, check if name was sent.
-    // If yes, create and return user.
-    // If no, throw.
-
-    if (contentId == 0x0)
-    {
-        throw;
-    }
-
-    if (users[msg.sender].contentId == 0x0)
-    {
-        users[msg.sender].contentId = contentId;
-
-        return (users[msg.sender].contentId);
-    }
-
-    return (users[msg.sender].contentId);
+  function createContent(string url) {
+    require (voteMap[url].curator == 0x0); //entry should not exist
+    voteMap[url].curator = msg.sender;
+    voteMap[url].voteCount = 1;
+    curatorMap[msg.sender] = url;
   }
 }
