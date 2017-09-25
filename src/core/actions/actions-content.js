@@ -10,13 +10,12 @@ export function upload(title, link) {
     const { provider } = getState().provider;
     const VotingContract = TruffleContract(VotingContractJSON);
 
-    VotingContract.setProvider(provider);
+    VotingContract.setProvider(provider.currentProvider);
 
-    const votingContractTransactionId = '0x0353bdc2bf8fa194aee03219caf091c5756c84b8';
+    const votingContractTransactionId = '0xf3a5c51623fe1a581cf8c27c358345effe873533';
     const contract = VotingContract.at(votingContractTransactionId);
 
-    contract.createContent(link.value).then((result) => {
-      alert(1)
+    contract.createContent(link, title).then((result) => {
       dispatch((() => {
         return {
           title: title,
@@ -27,7 +26,6 @@ export function upload(title, link) {
 
     }).catch((err) => {
       console.log('error iz: ', err);
-      alert(2)
     });
 
   }
